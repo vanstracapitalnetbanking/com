@@ -325,12 +325,27 @@
             gap: var(--spacing-xs);
             margin-bottom: var(--spacing-lg);
         }
+
+        .balance-top-row {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: var(--spacing-md);
+            flex-wrap: wrap;
+        }
+
+        .account-type-badge {
+            background: rgba(200, 154, 58, 0.18);
+            border: 1px solid rgba(200, 154, 58, 0.4);
+            color: var(--gold);
+            padding: 0.35rem 0.85rem;
+            border-radius: 999px;
             font-size: 12px;
-            color: #ffffff; /* increased contrast for WCAG AA */
-            font-weight: 600;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.6);
-            margin-top: 0.5rem;
-            margin-bottom: 1rem;
+            font-weight: 700;
+            line-height: 1.2;
+            white-space: nowrap;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+            transition: transform 0.2s ease, background 0.2s ease;
         }
 
         /* (secure-badge and footer styles removed) */
@@ -391,47 +406,39 @@
             gap: var(--spacing-md);
         }
 
-        .copy-btn {
-            background: rgba(200, 154, 58, 0.2);
-            border: 1px solid rgba(200, 154, 58, 0.3);
-            border-radius: 8px;
-            padding: 6px 8px;
-            cursor: pointer;
-            color: var(--gold);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            opacity: 0.8;
+        .nav-item svg {
+            stroke: currentColor;
+            fill: none;
         }
 
-        .copy-btn svg {
-            color: var(--gold);
+        .nav-item svg {
+            stroke: currentColor;
             fill: none;
-            stroke: var(--gold);
         }
-        
-        .copy-btn:hover {
-            background: rgba(200, 154, 58, 0.3);
-            border-color: var(--gold);
-            opacity: 1;
-            transform: translateY(-2px);
-            box-shadow: 0 2px 8px rgba(200, 154, 58, 0.2);
+
+        .nav-item svg path,
+        .nav-item svg circle,
+        .nav-item svg rect {
+            stroke: currentColor;
+        }
+
+        .nav-item.active svg,
+        .nav-item.active .nav-icon {
+            color: white;
+            stroke: white;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 9999;
+            background-clip: padding-box;
         }
         
         .copy-btn:active {
             transform: scale(0.95);
-        }
-        
-        .account-type {
-            background: rgba(200, 154, 58, 0.2);
-            border: 1px solid rgba(200, 154, 58, 0.4);
-            padding: 0.35rem 0.85rem;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--gold);
-            margin-left: auto;
         }
         
         .account-status {
@@ -957,10 +964,7 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-            background: var(--gold);
-            border-radius: 1.5px;
-        }
-        
+
         .nav-item svg { width: 24px; height: 24px; transition: all 0.3s ease; }
         .nav-item span { font-size: 11px; font-weight: 600; }
         
@@ -2233,16 +2237,6 @@
                 letter-spacing: 1px;
             }
 
-            .copy-btn {
-                padding: 4px 6px;
-                min-width: 32px;
-                height: 32px;
-            }
-
-            .copy-btn svg {
-                width: 12px;
-                height: 12px;
-            }
 
             .account-type-badge {
                 align-self: flex-end;
@@ -2701,7 +2695,10 @@
     <!-- Balance Section -->
     <section class="balance-section">
         <div class="balance-top-layer">
-            <div class="balance-label">Available Balance</div>
+            <div class="balance-top-row">
+                <div class="balance-label">Available Balance</div>
+                <span class="account-type-badge" id="accountType">Premium Checking</span>
+            </div>
             <div class="balance-display" onclick="toggleBalanceVisibility()" title="Click to hide/show balance">
                 <div class="balance-amount" id="balanceAmount">€0.00</div>
                 <svg class="balance-toggle-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -2715,19 +2712,11 @@
             <div class="account-info-row">
                 <div class="account-number-container">
                     <span class="account-number" id="accountNumber">••••••••••••••••••••••</span>
-                    <button class="copy-btn" onclick="copyAccountNumber()" title="Copy account number">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 14px; height: 14px;">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V7M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path>
-                        </svg>
-                    </button>
                 </div>
-                <span class="account-type-badge" id="accountType">Premium Checking</span>
             </div>
 
             <div class="account-status active" id="accountStatusBadge">Active</div>
         </div>
-    </section>
-
     </section>
 
     <!-- Quick Actions Header -->
