@@ -19,8 +19,8 @@
         }
         
         :root {
-            --primary: #0F172A; /* Deep navy */
-            --primary-dark: #020617; /* Darker navy */
+            --primary: #041225; /* Midnight navy */
+            --primary-dark: #0B2A3F; /* Deep slate */
             --accent: #C89A3A; /* Gold */
             --success: #10B981; /* Green - limited use */
             --surface: #FFFFFF;
@@ -46,7 +46,7 @@
         
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--background);
+            background: linear-gradient(180deg, var(--primary) 0%, var(--primary-dark) 45%, #081D33 100%);
             color: var(--text);
             margin: 0;
             padding: 0;
@@ -128,14 +128,27 @@
         
         /* Header */
         .app-header {
-            background: var(--surface);
-            color: var(--text);
-            padding: var(--spacing-md) var(--spacing-md) var(--spacing-sm);
+            background: rgba(4, 18, 37, 0.95);
+            color: white;
+            padding: var(--spacing-lg) var(--spacing-md) 0;
             position: sticky;
             top: 0;
             z-index: 50;
-            border-bottom: 1px solid var(--border);
-            box-shadow: 0 1px 3px var(--shadow);
+            overflow: hidden;
+            position: relative;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+        }
+
+        .app-header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, transparent 100%);
+            pointer-events: none;
         }
 
         .header-content {
@@ -143,14 +156,17 @@
             align-items: center;
             justify-content: space-between;
             gap: var(--spacing-md);
-            max-width: 480px;
+            max-width: 100%;
             margin: 0 auto;
+            padding: var(--spacing-md) var(--spacing-md) var(--spacing-lg);
         }
 
         .logo-section {
             display: flex;
             flex-direction: column;
             gap: 2px;
+            flex: 1;
+            margin-left: var(--spacing-sm);
         }
 
         .logo-img {
@@ -158,22 +174,16 @@
         }
 
         .welcome-greeting {
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--text-secondary);
+            font-size: 16px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.9);
             line-height: 1.4;
-        }
-
-        .username-text {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--primary);
-            line-height: 1.2;
+            margin: 0;
         }
         
         .user-avatar {
-            width: 40px;
-            height: 40px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--gold) 0%, #d4a574 100%);
             display: flex;
@@ -181,22 +191,22 @@
             justify-content: center;
             cursor: pointer;
             overflow: hidden;
-            border: 2px solid rgba(255,255,255,0.3);
+            border: 2px solid rgba(255, 255, 255, 0.2);
             transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(200, 154, 58, 0.2);
+            box-shadow: 0 4px 12px rgba(200, 154, 58, 0.25), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+            flex-shrink: 0;
         }
         
         .user-avatar:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(200, 154, 58, 0.3);
+            transform: scale(1.08);
+            box-shadow: 0 6px 16px rgba(200, 154, 58, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.3);
         }
         
         .header-icons {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            margin-left: auto;
-            margin-right: 1rem;
+            gap: 0.75rem;
+            flex-shrink: 0;
         }
         
         .notification-icon {
@@ -205,13 +215,13 @@
             align-items: center;
             justify-content: center;
             transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
-            width: 46px;
-            height: 46px;
-            color: #f6c66f;
-            background: rgba(255, 255, 255, 0.10);
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.20);
-            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.10);
+            width: 42px;
+            height: 42px;
+            color: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: none;
             position: relative;
         }
         
@@ -226,8 +236,9 @@
         }
         
         .notification-icon:hover {
-            background: rgba(255, 255, 255, 0.18);
-            transform: translateY(-2px) scale(1.02);
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-1px);
+            color: white;
         }
         
         .notification-badge {
@@ -268,27 +279,24 @@
         
         /* Balance Section */
         .balance-section {
-            background: linear-gradient(135deg, var(--primary) 0%, #1E293B 50%, #334155 100%);
+            background: rgba(255, 255, 255, 0.03);
             color: white;
-            margin: var(--spacing-md);
-            border-radius: var(--radius-2xl);
-            padding: var(--spacing-lg);
+            margin: 0;
+            padding: var(--spacing-xl) var(--spacing-md) var(--spacing-lg);
             position: relative;
-            overflow: hidden;
-            box-shadow: 0 8px 32px rgba(15, 23, 42, 0.15), 0 0 64px rgba(49, 69, 85, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            overflow: visible;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: var(--spacing-lg);
         }
         
         .balance-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 40%;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, transparent 100%);
-            border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
-            pointer-events: none;
+            display: none;
         }
         
         .balance-section > * {
@@ -297,21 +305,27 @@
         }
         
         .balance-label {
-            font-size: 12px;
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.8);
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.1em;
             line-height: 1.4;
+            margin-bottom: var(--spacing-sm);
+            opacity: 0.9;
         }
 
         .balance-amount {
-            font-size: 36px;
-            font-weight: 700;
+            font-size: 72px;
+            font-weight: 800;
             color: white;
-            line-height: 1.1;
-            letter-spacing: -0.02em;
+            line-height: 1.0;
+            letter-spacing: -0.03em;
             transition: filter 0.3s ease;
+            margin: 0;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 2;
         }
         
         .balance-amount.hidden {
@@ -322,34 +336,12 @@
         .balance-top-layer {
             display: flex;
             flex-direction: column;
-            gap: var(--spacing-xs);
-            margin-bottom: var(--spacing-lg);
+            gap: var(--spacing-sm);
+            margin-bottom: 0;
+            align-items: center;
+            width: 100%;
         }
 
-        .balance-top-row {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            gap: var(--spacing-md);
-            flex-wrap: wrap;
-        }
-
-        .account-type-badge {
-            background: rgba(200, 154, 58, 0.18);
-            border: 1px solid rgba(200, 154, 58, 0.4);
-            color: var(--gold);
-            padding: 0.35rem 0.85rem;
-            border-radius: 999px;
-            font-size: 12px;
-            font-weight: 700;
-            line-height: 1.2;
-            white-space: nowrap;
-            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
-            transition: transform 0.2s ease, background 0.2s ease;
-        }
-
-        /* (secure-badge and footer styles removed) */
-        
         .account-info {
             display: flex;
             align-items: center;
@@ -365,13 +357,41 @@
             align-items: center;
             gap: 0.5rem;
             position: relative;
+            justify-content: center;
         }
         
         .balance-display {
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: var(--spacing-sm);
             cursor: pointer;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.06) 100%);
+            padding: var(--spacing-lg) var(--spacing-xl);
+            border-radius: 35px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            transition: all 0.3s ease;
+            box-shadow: 0 18px 36px rgba(0, 0, 0, 0.24), inset 0 1px 2px rgba(255, 255, 255, 0.12);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .balance-display::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0%, transparent 50%, rgba(255, 255, 255, 0.04) 100%);
+            border-radius: 35px;
+            pointer-events: none;
+        }
+        
+        .balance-display:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.28), inset 0 1px 2px rgba(255, 255, 255, 0.14);
+            border-color: rgba(255, 255, 255, 0.28);
         }
 
         .balance-amount.hidden {
@@ -381,34 +401,33 @@
         }
 
         .balance-toggle-icon {
-            width: 24px;
-            height: 24px;
-            color: rgba(255, 255, 255, 0.7);
+            width: 28px;
+            height: 28px;
+            color: rgba(255, 255, 255, 0.8);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            opacity: 0.7;
+            opacity: 0.8;
         }
 
         .balance-toggle-icon:hover {
             opacity: 1;
             transform: scale(1.1);
+            color: white;
         }
 
         .balance-bottom-layer {
             display: flex;
             flex-direction: column;
             gap: var(--spacing-sm);
+            align-items: center;
+            width: 100%;
         }
 
         .account-info-row {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
             gap: var(--spacing-md);
-        }
-
-        .nav-item svg {
-            stroke: currentColor;
-            fill: none;
+            flex-wrap: wrap;
         }
 
         .nav-item svg {
@@ -420,12 +439,21 @@
         .nav-item svg circle,
         .nav-item svg rect {
             stroke: currentColor;
+            fill: none;
+        }
+
+        .nav-item.active {
+            color: var(--gold);
         }
 
         .nav-item.active svg,
-        .nav-item.active .nav-icon {
-            color: white;
-            stroke: white;
+        .nav-item.active .nav-icon,
+        .nav-item.active svg path,
+        .nav-item.active svg circle,
+        .nav-item.active svg rect {
+            color: var(--gold);
+            stroke: var(--gold);
+            fill: none;
         }
 
         .bottom-nav {
@@ -527,52 +555,50 @@
             display: grid;
             grid-template-columns: repeat(4, minmax(0, 1fr));
             gap: var(--spacing-md);
-            padding: 0 var(--spacing-md);
+            padding: var(--spacing-xl) var(--spacing-md) var(--spacing-lg);
             margin-bottom: var(--spacing-xl);
+            background: rgba(255, 255, 255, 0.03);
+            margin-top: 0;
+            border-radius: 18px;
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .quick-action {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 0.75rem;
-            padding: 1.1rem 1rem;
-            min-height: 120px;
-            background: rgba(15, 23, 42, 0.04);
+            gap: 0.5rem;
+            padding: 1rem 0.75rem;
+            min-height: 110px;
+            background: transparent;
             border-radius: var(--radius-lg);
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            box-shadow: 0 4px 12px var(--shadow);
-            border: 1px solid rgba(15, 23, 42, 0.08);
+            box-shadow: none;
+            border: 1px solid transparent;
             position: relative;
-            overflow: hidden;
+            overflow: visible;
         }
 
         .quick-action::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.05) 0%, rgba(200, 154, 58, 0.06) 100%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            display: none;
         }
 
         .quick-action:hover {
-            transform: translateY(-4px) scale(1.01);
-            box-shadow: 0 10px 20px var(--shadow-hover);
-            border-color: rgba(200, 154, 58, 0.35);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12);
         }
 
         .quick-action:hover::before {
-            opacity: 1;
+            opacity: 0;
         }
 
         .quick-action:active {
-            transform: translateY(-2px) scale(0.99);
-            box-shadow: 0 6px 12px var(--shadow);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
         }
         
         .quick-action.restricted {
@@ -593,23 +619,37 @@
         }
         
         .quick-action-icon {
-            width: 56px;
-            height: 56px;
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.12) 0%, rgba(200, 154, 58, 0.16) 100%);
-            border-radius: 18px;
+            width: 64px;
+            height: 64px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid rgba(15, 23, 42, 0.14);
+            border: 2px solid rgba(255, 255, 255, 0.2);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), inset 0 1px 2px rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .quick-action-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+            border-radius: 50%;
+            pointer-events: none;
         }
         
         .quick-action:hover .quick-action-icon {
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.18) 0%, rgba(200, 154, 58, 0.24) 100%);
-            border-color: rgba(200, 154, 58, 0.4);
-            transform: scale(1.04);
-            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.14);
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.15);
         }
         
         .quick-action-icon svg {
@@ -620,20 +660,21 @@
         }
         
         .quick-action-label {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
-            color: var(--primary);
+            color: rgba(255, 255, 255, 0.9);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             z-index: 1;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
-            margin-top: 0.35rem;
+            text-shadow: none;
+            margin-top: 0.25rem;
             text-align: center;
+            line-height: 1.3;
         }
         
         .quick-action:hover .quick-action-label {
-            color: var(--primary-dark);
-            transform: translateY(-1px);
+            color: white;
+            transform: translateY(-2px);
         }
 
         /* Support List Items */
@@ -680,13 +721,85 @@
         }
         
         .section-title {
-            font-size: 18px;
-            font-weight: 800;
-            color: #1F2937;
-            letter-spacing: -0.5px;
+            font-size: 20px;
+            font-weight: 700;
+            color: white;
+            letter-spacing: -0.02em;
             text-shadow: none;
+            margin: 0;
         }
-        
+
+        .lower-section {
+            background: white;
+            color: var(--primary);
+            padding: var(--spacing-xl) 0 var(--spacing-xl);
+            margin-top: -24px;
+            border-top-left-radius: 36px;
+            border-top-right-radius: 36px;
+            overflow: hidden;
+            box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .lower-section .section-header {
+            padding: 1rem;
+        }
+
+        .lower-section .section-title {
+            color: var(--primary);
+        }
+
+        .lower-section .view-all-btn {
+            color: var(--primary);
+        }
+
+        .lower-section .transactions-card {
+            background: #F8FAFC;
+            border-color: #E2E8F0;
+            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+        }
+
+        .lower-section .transaction-item {
+            border-bottom: 1px solid #E5E7EB;
+            background: white;
+        }
+
+        .lower-section .transaction-item:hover {
+            background: #F8FAFC;
+        }
+
+        .lower-section .transaction-title {
+            color: var(--text);
+        }
+
+        .lower-section .transaction-meta {
+            color: var(--muted);
+        }
+
+        .lower-section .transaction-amount-value {
+            color: var(--text);
+        }
+
+        .lower-section .empty-state {
+            color: var(--text);
+        }
+
+        .lower-section .empty-state-icon {
+            background: #F1F5F9;
+            border-color: #E2E8F0;
+        }
+
+        .lower-section .empty-state-icon svg {
+            color: var(--text-secondary);
+        }
+
+        .lower-section .empty-state-title {
+            color: var(--primary);
+        }
+
+        .lower-section .empty-state-message {
+            color: var(--muted);
+        }
+
         .view-all-btn {
             background: transparent;
             border: none;
@@ -725,31 +838,32 @@
             transform: scale(0.98);
         }
         .transactions-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
+            background: rgba(255, 255, 255, 0.04);
             margin: 0 var(--spacing-md) var(--spacing-xl);
-            border-radius: var(--radius-lg);
+            border-radius: 18px;
             overflow: hidden;
-            box-shadow: var(--shadow-lg);
-            border: 1px solid rgba(200, 154, 58, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(10px);
+            position: relative;
         }
         
         .transaction-item {
             display: flex;
             align-items: center;
             padding: var(--spacing-lg) var(--spacing-md);
-            border-bottom: 1px solid rgba(200, 154, 58, 0.1);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         .transaction-item:hover {
-            background: linear-gradient(135deg, rgba(200, 154, 58, 0.02) 0%, rgba(200, 154, 58, 0.05) 100%);
+            background: rgba(0, 0, 0, 0.05);
             transform: translateX(4px);
         }
         
         .transaction-item:active {
-            background: linear-gradient(135deg, rgba(200, 154, 58, 0.05) 0%, rgba(200, 154, 58, 0.08) 100%);
+            background: rgba(0, 0, 0, 0.1);
             transform: scale(0.98);
         }
         
@@ -767,21 +881,21 @@
             margin-right: var(--spacing-md);
             flex-shrink: 0;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(200, 154, 58, 0.15);
-            background: linear-gradient(135deg, rgba(200, 154, 58, 0.05) 0%, rgba(200, 154, 58, 0.02) 100%);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            background: rgba(0, 0, 0, 0.05);
         }
         
         .transaction-icon svg {
             width: 28px;
             height: 28px;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            color: var(--gold);
+            color: var(--text-secondary);
         }
         
         .transaction-item:hover .transaction-icon {
             transform: scale(1.05);
-            border-color: rgba(200, 154, 58, 0.25);
-            background: linear-gradient(135deg, rgba(200, 154, 58, 0.08) 0%, rgba(200, 154, 58, 0.04) 100%);
+            border-color: rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.1);
         }
         
         .transaction-icon.income { background: #d1fae5; border-color: #6ee7b7; }
@@ -799,7 +913,7 @@
         .transaction-title {
             font-weight: 600;
             font-size: 15px;
-            color: #1F2937;
+            color: var(--text);
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -807,7 +921,7 @@
         
         .transaction-meta {
             font-size: 13px;
-            color: #9CA3AF;
+            color: var(--text-muted);
             margin-top: 0.125rem;
         }
         
@@ -819,10 +933,11 @@
         .transaction-amount-value {
             font-weight: 700;
             font-size: 15px;
+            color: var(--text);
         }
         
-        .transaction-amount-value.income { color: #059669; }
-        .transaction-amount-value.expense { color: #DC2626; }
+        .transaction-amount-value.income { color: #10B981; }
+        .transaction-amount-value.expense { color: #EF4444; }
         
         .transaction-status {
             font-size: 11px;
@@ -844,31 +959,31 @@
         .empty-state-icon {
             width: 80px;
             height: 80px;
-            background: linear-gradient(135deg, rgba(200, 154, 58, 0.1) 0%, rgba(200, 154, 58, 0.05) 100%);
+            background: rgba(0, 0, 0, 0.05);
             border-radius: var(--radius-xl);
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: var(--spacing-lg);
-            border: 1px solid rgba(200, 154, 58, 0.15);
+            border: 1px solid rgba(0, 0, 0, 0.1);
         }
         
         .empty-state-icon svg {
             width: 40px;
             height: 40px;
-            color: var(--gold);
+            color: var(--text-muted);
         }
         
         .empty-state-title {
             font-size: 18px;
             font-weight: 600;
-            color: var(--primary);
+            color: var(--text);
             margin-bottom: var(--spacing-sm);
         }
         
         .empty-state-message {
             font-size: 14px;
-            color: var(--text-secondary);
+            color: var(--text-muted);
             margin-bottom: var(--spacing-lg);
             max-width: 280px;
             line-height: 1.5;
@@ -899,18 +1014,21 @@
         
         /* Bottom Navigation */
         .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
-            border-top: 1px solid rgba(200, 154, 58, 0.1);
+            position: fixed !important;
+            bottom: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            width: 100vw !important;
+            background: rgba(4, 18, 37, 0.96);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
             display: flex;
             justify-content: space-around;
             padding: var(--spacing-md) 0 var(--spacing-lg);
-            z-index: 50;
-            box-shadow: var(--shadow-lg);
-            backdrop-filter: blur(10px);
+            z-index: 9999;
+            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.18);
+            backdrop-filter: blur(16px);
+            pointer-events: auto;
+            transform: none !important;
         }
         
         .nav-item {
@@ -919,7 +1037,7 @@
             align-items: center;
             gap: var(--spacing-xs);
             padding: var(--spacing-sm) var(--spacing-lg);
-            color: var(--text-secondary);
+            color: rgba(255, 255, 255, 0.72);
             text-decoration: none;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             border-radius: var(--radius-lg);
@@ -927,20 +1045,21 @@
         }
         
         .nav-item:hover {
-            background: linear-gradient(135deg, rgba(200, 154, 58, 0.05) 0%, rgba(200, 154, 58, 0.02) 100%);
-            color: var(--primary);
+            background: rgba(255, 255, 255, 0.08);
+            color: white;
             transform: translateY(-2px);
         }
         
         .nav-item.active {
-            background: linear-gradient(135deg, var(--gold) 0%, #b8860b 100%);
+            background: rgba(255, 255, 255, 0.08);
             color: white;
-            box-shadow: 0 4px 12px rgba(200, 154, 58, 0.3);
+            box-shadow: none;
         }
         
         .nav-item.active:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(200, 154, 58, 0.4);
+            transform: translateY(-1px);
+            box-shadow: none;
+            color: white;
         }
         
         .nav-item:active {
@@ -951,10 +1070,24 @@
             width: 24px;
             height: 24px;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            color: inherit;
+            stroke: currentColor;
+            fill: none;
+        }
+        
+        .nav-item svg path,
+        .nav-item svg circle,
+        .nav-item svg rect {
+            stroke: currentColor;
+            fill: none;
+        }
+        
+        .nav-item.active .nav-label {
+            color: var(--gold);
         }
         
         .nav-item.active .nav-icon {
-            transform: scale(1.1);
+            transform: none;
         }
         
         .nav-label {
@@ -967,6 +1100,20 @@
 
         .nav-item svg { width: 24px; height: 24px; transition: all 0.3s ease; }
         .nav-item span { font-size: 11px; font-weight: 600; }
+
+        .bottom-nav .nav-item.active svg,
+        .bottom-nav .nav-item.active svg path,
+        .bottom-nav .nav-item.active svg circle,
+        .bottom-nav .nav-item.active svg rect {
+            stroke: white !important;
+            color: white !important;
+            fill: white !important;
+        }
+
+        .bottom-nav .nav-item.active .nav-icon {
+            stroke-width: 3 !important;
+            filter: drop-shadow(0 0 6px rgba(0,0,0,0.15));
+        }
         
         /* Modals */
         .modal-overlay {
@@ -2208,8 +2355,9 @@
             }
 
             .balance-amount {
-                font-size: 32px;
-                line-height: 1.1;
+                font-size: 48px;
+                line-height: 1.0;
+                font-weight: 800;
             }
 
             .balance-toggle-icon {
@@ -2237,12 +2385,6 @@
                 letter-spacing: 1px;
             }
 
-
-            .account-type-badge {
-                align-self: flex-end;
-                font-size: 11px;
-                padding: 4px 8px;
-            }
 
             .account-status {
                 align-self: flex-start;
@@ -2445,7 +2587,8 @@
 
         @media (max-width: 480px) {
             .balance-amount {
-                font-size: 28px;
+                font-size: 42px;
+                font-weight: 800;
             }
 
             .quick-action {
@@ -2671,9 +2814,12 @@
     <!-- Header -->
     <header class="app-header">
         <div class="header-content">
+            <div class="user-avatar" id="profileAvatarBtn" onclick="handleProfileAvatarClick(event)">
+                <span id="userInitials" class="initials">--</span>
+                <img id="userAvatarImg" src="" alt="" style="display: none;">
+            </div>
             <div class="logo-section">
-                <div class="welcome-greeting" id="welcomeGreeting">Good morning</div>
-                <div class="username-text" id="usernameDisplay">John Doe</div>
+                <div class="welcome-greeting" id="welcomeGreeting">Welcome, Dev User</div>
             </div>
             <div class="header-icons">
                 <div class="notification-icon" onclick="openNotifications()" aria-label="Open notifications" role="button">
@@ -2685,20 +2831,13 @@
                     <span class="notification-badge" id="notificationBadge" style="display: none;">3</span>
                 </div>
             </div>
-            <div class="user-avatar" id="profileAvatarBtn" onclick="handleProfileAvatarClick(event)">
-                <span id="userInitials" class="initials">--</span>
-                <img id="userAvatarImg" src="" alt="" style="display: none;">
-            </div>
         </div>
     </header>
 
     <!-- Balance Section -->
     <section class="balance-section">
         <div class="balance-top-layer">
-            <div class="balance-top-row">
-                <div class="balance-label">Available Balance</div>
-                <span class="account-type-badge" id="accountType">Premium Checking</span>
-            </div>
+            <div class="balance-label">Available Balance</div>
             <div class="balance-display" onclick="toggleBalanceVisibility()" title="Click to hide/show balance">
                 <div class="balance-amount" id="balanceAmount">€0.00</div>
                 <svg class="balance-toggle-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -2707,21 +2846,6 @@
                 </svg>
             </div>
         </div>
-
-        <div class="balance-bottom-layer">
-            <div class="account-info-row">
-                <div class="account-number-container">
-                    <span class="account-number" id="accountNumber">••••••••••••••••••••••</span>
-                </div>
-            </div>
-
-            <div class="account-status active" id="accountStatusBadge">Active</div>
-        </div>
-    </section>
-
-    <!-- Quick Actions Header -->
-    <section style="padding: 0 1rem; margin-bottom: 1rem; margin-top: 1.5rem;">
-        <h2 class="section-title" style="font-size: 18px; margin: 0;">Quick Actions</h2>
     </section>
 
     <!-- Quick Actions Buttons -->
@@ -2765,7 +2889,7 @@
     </section>
 
     <!-- Recent Transactions -->
-    <section>
+    <section class="lower-section">
         <div class="section-header">
             <h2 class="section-title">Recent Transactions</h2>
             <button class="view-all-btn" onclick="showAllTransactions()">View All →</button>
@@ -2783,14 +2907,7 @@
                 <button class="empty-state-cta" onclick="openTransferModal()">Make Your First Transfer</button>
             </div>
         </div>
-    </section>
 
-    <!-- Announcements & News -->
-    <section>
-        <div class="section-header">
-            <h2 class="section-title">Latest News</h2>
-        </div>
-        
         <div class="announcements-container" id="announcementsContainer">
             <!-- Announcement cards will be inserted here -->
         </div>
@@ -2798,9 +2915,9 @@
 
     <!-- Bottom Navigation -->
     <nav class="bottom-nav">
-        <a href="dashboard-v2.html" class="nav-item active">
+       <a href="dashboard-v2.html" class="nav-item active">
             <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l7-7 7 7M5 10v10h14V10"></path>
             </svg>
             <span class="nav-label">Home</span>
         </a>
